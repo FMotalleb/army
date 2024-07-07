@@ -18,6 +18,7 @@ package cmd
 
 import (
 	"fmt"
+	"log/slog"
 	"net"
 
 	"github.com/spf13/cobra"
@@ -29,19 +30,22 @@ type ConnectParams struct {
 	proto string
 }
 
-var connectParams = &ConnectParams{}
+var dialParams = &ConnectParams{}
 
 // connectCmd represents the connect command
 var connectCmd = &cobra.Command{
 	Use:   "dial <IP> <Port>",
 	Short: "opens a connection to an <IP> <Port>",
 	Run: func(cmd *cobra.Command, args []string) {
-
-		net.Dial(connectParams.proto, fmt.Sprintf("%s:%d", connectParams.ip, connectParams.port))
+		slog.SetDefault(slog.Default().WithGroup("connect"))
+		addr := fmt.Sprintf("%s:%d", dialParams.ip, dialParams.port)
+		slog.Debug("dialing", addr)
+		net.Dial(dialParams.proto, addr)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(connectCmd)
-	connectCmd.Flags().StringVarP(&connectParams.proto, "proto", "p", "tcp", "Help message for toggle")
+
+	connectCmd.Flags().StringVarP(&dialParams.proto, "proto", "p", "tcp", "Help message for toggle")
 }

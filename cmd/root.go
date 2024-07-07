@@ -42,7 +42,6 @@ var rootCmd = &cobra.Command{
 			cmdConfig.Trace,
 		)
 		logger := slog.New(handler)
-
 		slog.SetDefault(logger)
 		slog.Debug("debug log enabled")
 	},
