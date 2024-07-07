@@ -20,7 +20,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/FMotalleb/army/logutils"
+	"github.com/FMotalleb/army/log"
 	"github.com/spf13/cobra"
 )
 
@@ -36,7 +36,7 @@ var rootCmd = &cobra.Command{
 	Use:   "army",
 	Short: "A swiss-army knife",
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		handler := logutils.NewLogHandler(
+		handler := log.NewLogHandler(
 			"army",
 			cmdConfig.Verbose,
 			cmdConfig.Trace,

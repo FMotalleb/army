@@ -39,4 +39,4 @@ dist/
 .env
 .envrc
 *.log
-crontab-go
+army

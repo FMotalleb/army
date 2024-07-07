@@ -1,4 +1,4 @@
-package logutils
+package log
 
 import (
 	"bytes"
